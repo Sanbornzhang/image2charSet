@@ -1,0 +1,60 @@
+<!DOCTYLE html>
+<meta charset=utf-8>
+<head>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+
+<script type="text/javascript">
+
+$(function(){
+
+    $('#add').submit(function(){
+        var data = new FormData($('#add')[0]);  
+        $.ajax({  
+            url: 'http://127.0.0.1:3000/file',    
+            type: 'POST',  
+            data: data,  
+            dataType: 'JSON',  
+            cache: false,  
+            processData: false,  
+            contentType: false, 
+            success:function(data){  
+                draw(data)
+            }   
+        });  
+
+        return false;   
+    });
+    
+});
+function draw(data) {
+      $('#canvas').remove();
+      $('#container').append('<canvas id="canvas" width="1850px" height="900px"></canvas>');
+      var canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        const textList = data.text
+        const px = Math.floor(parseInt( 1080 / data.rows))
+        var ctx = canvas.getContext("2d");
+        ctx.font = `${px}px serif`;
+        textList.forEach((v,i)=>{
+          v = '|' + v
+          console.log(v)
+          ctx.fillText(v, 1, i * px);
+        })
+      }
+    }
+</script>
+
+
+
+
+<body>
+<form id='add'>
+<input type="file" name='source'></input>
+<input type="submit">
+</form>
+<div id="container" style="margin: 0 auto; width: 1860px">
+<canvas id="canvas" width="1850px" height="900px"></canvas>
+</div>
+</body>

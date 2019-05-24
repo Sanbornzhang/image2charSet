@@ -1,0 +1,16 @@
+{
+  "name": "images2character",
+  "version": "0.0.1",
+  "description": "image to character",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sanborn",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0"
+  }
+}
